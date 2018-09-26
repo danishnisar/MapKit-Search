@@ -7,12 +7,39 @@
 //
 
 import UIKit
+import MapKit
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        
+        let searchRequest = MKLocalSearch.Request()
+        searchRequest.naturalLanguageQuery = "Pizza"
+        searchRequest.region = .init()
+        let search  = MKLocalSearch(request: searchRequest)
+        
+        search.start { (response, error) in
+            if error != nil {
+                print("error")
+            }else {
+                let itemcount = response!.mapItems.first
+                itemcount?.openInMaps(launchOptions: nil)
+                
+            }
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 
 
